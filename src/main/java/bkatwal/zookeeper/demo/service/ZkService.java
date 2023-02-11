@@ -7,12 +7,6 @@ import org.I0Itec.zkclient.IZkStateListener;
 /** @author "Bikas Katwal" 26/03/19 */
 public interface ZkService {
 
-  String getLeaderNodeData();
-
-  void electForMaster();
-
-  boolean masterExists();
-
   void addToLiveNodes(String nodeName, String data);
 
   List<String> getLiveNodes();
@@ -25,7 +19,7 @@ public interface ZkService {
 
   void createAllParentNodes();
 
-  String getLeaderNodeData2();
+  String getLeaderNodeData();
 
   String getZNodeData(String path);
 

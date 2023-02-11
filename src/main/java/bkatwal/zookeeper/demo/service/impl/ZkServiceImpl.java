@@ -6,7 +6,6 @@ import bkatwal.zookeeper.demo.util.ZkDemoUtil;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
-import org.I0Itec.zkclient.exception.ZkNodeExistsException;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.slf4j.Logger;
@@ -42,33 +41,6 @@ public class ZkServiceImpl implements ZkService {
 
   public void closeConnection() {
     zkClient.close();
-  }
-
-  @Override
-  public String getLeaderNodeData() {
-
-    return zkClient.readData(ELECTION_MASTER, true);
-  }
-
-  @Override
-  public void electForMaster() {
-    if (!zkClient.exists(ELECTION_NODE)) {
-      zkClient.create(ELECTION_MASTER, "election node", CreateMode.PERSISTENT);
-    }
-    try {
-      zkClient.create(
-          ELECTION_MASTER,
-          zkDemoUtil.getHostPostOfServer(),
-          ZooDefs.Ids.OPEN_ACL_UNSAFE,
-          CreateMode.EPHEMERAL);
-    } catch (ZkNodeExistsException e) {
-      LOGGER.error("Master already created!!, {}", e);
-    }
-  }
-
-  @Override
-  public boolean masterExists() {
-    return zkClient.exists(ELECTION_MASTER);
   }
 
   @Override
@@ -131,14 +103,14 @@ public class ZkServiceImpl implements ZkService {
   }
 
   @Override
-  public String getLeaderNodeData2() {
-    if (!zkClient.exists(ELECTION_NODE_2)) {
+  public String getLeaderNodeData() {
+    if (!zkClient.exists(ELECTION_NODE)) {
       throw new RuntimeException("No node /election2 exists");
     }
-    List<String> nodesInElection = zkClient.getChildren(ELECTION_NODE_2);
+    List<String> nodesInElection = zkClient.getChildren(ELECTION_NODE);
     Collections.sort(nodesInElection);
     String masterZNode = nodesInElection.get(0);
-    return getZNodeData(ELECTION_NODE_2.concat("/").concat(masterZNode));
+    return getZNodeData(ELECTION_NODE.concat("/").concat(masterZNode));
   }
 
   @Override
@@ -148,10 +120,10 @@ public class ZkServiceImpl implements ZkService {
 
   @Override
   public void createNodeInElectionZnode(String data) {
-    if (!zkClient.exists(ELECTION_NODE_2)) {
-      zkClient.create(ELECTION_NODE_2, "election node", CreateMode.PERSISTENT);
+    if (!zkClient.exists(ELECTION_NODE)) {
+      zkClient.create(ELECTION_NODE, "election node", CreateMode.PERSISTENT);
     }
-    zkClient.create(ELECTION_NODE_2.concat("/node"), data, CreateMode.EPHEMERAL_SEQUENTIAL);
+    zkClient.create(ELECTION_NODE.concat("/node"), data, CreateMode.EPHEMERAL_SEQUENTIAL);
   }
 
   @Override

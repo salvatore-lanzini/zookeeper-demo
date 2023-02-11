@@ -1,7 +1,7 @@
 package bkatwal.zookeeper.demo.util;
 
 import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ALL_NODES;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE_2;
+import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE;
 import static bkatwal.zookeeper.demo.util.ZkDemoUtil.LIVE_NODES;
 
 import bkatwal.zookeeper.demo.service.ZkService;
@@ -46,7 +46,7 @@ public class OnStartUpApplication implements ApplicationListener<ContextRefreshe
       ClusterInfo.getClusterInfo().getAllNodes().addAll(zkService.getAllNodes());
 
       zkService.createNodeInElectionZnode(zkDemoUtil.getHostPostOfServer());
-      ClusterInfo.getClusterInfo().setMaster(zkService.getLeaderNodeData2());
+      ClusterInfo.getClusterInfo().setMaster(zkService.getLeaderNodeData());
 
       // sync person data from master
       syncDataFromMaster();
@@ -59,7 +59,7 @@ public class OnStartUpApplication implements ApplicationListener<ContextRefreshe
 
       // register watchers for leader change, live nodes change, all nodes change and zk session
       // state change
-      zkService.registerChildrenChangeWatcher(ELECTION_NODE_2, masterChangeListener);
+      zkService.registerChildrenChangeWatcher(ELECTION_NODE, masterChangeListener);
       zkService.registerChildrenChangeWatcher(LIVE_NODES, liveNodeChangeListener);
       zkService.registerChildrenChangeWatcher(ALL_NODES, allNodesChangeListener);
       zkService.registerZkSessionStateListener(connectStateChangeListener);

@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Collections;
 import java.util.List;
 
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE_2;
+import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE;
 
 /** @author "Bikas Katwal" 27/03/19 */
-public class MasterChangeListenerApproach2 implements IZkChildListener {
+public class MasterChangeListenerApproach implements IZkChildListener {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(MasterChangeListenerApproach2.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MasterChangeListenerApproach.class);
 
   private ZkService zkService;
 
@@ -39,7 +39,7 @@ public class MasterChangeListenerApproach2 implements IZkChildListener {
       String masterZNode = currentChildren.get(0);
 
       // once znode is fetched, fetch the znode data to get the hostname of new leader
-      String masterNode = zkService.getZNodeData(ELECTION_NODE_2.concat("/").concat(masterZNode));
+      String masterNode = zkService.getZNodeData(ELECTION_NODE.concat("/").concat(masterZNode));
       LOGGER.info("new master is: {}", masterNode);
 
       //update the cluster info with new leader

@@ -34,7 +34,7 @@ public class BeanConfig {
   @Bean(name = "masterChangeListener")
   @Scope("singleton")
   public IZkChildListener masterChangeListener2() {
-    MasterChangeListenerApproach2 masterChangeListener = new MasterChangeListenerApproach2();
+    MasterChangeListenerApproach masterChangeListener = new MasterChangeListenerApproach();
     masterChangeListener.setZkService(zkService);
     return masterChangeListener;
   }
