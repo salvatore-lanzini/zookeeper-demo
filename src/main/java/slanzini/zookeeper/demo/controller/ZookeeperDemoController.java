@@ -1,9 +1,9 @@
-package bkatwal.zookeeper.demo.controller;
+package slanzini.zookeeper.demo.controller;
 
-import bkatwal.zookeeper.demo.model.Person;
-import bkatwal.zookeeper.demo.util.ClusterInfo;
-import bkatwal.zookeeper.demo.util.DataStorage;
-import bkatwal.zookeeper.demo.util.ZkDemoUtil;
+import slanzini.zookeeper.demo.model.Person;
+import slanzini.zookeeper.demo.util.ClusterInfo;
+import slanzini.zookeeper.demo.util.DataStorage;
+import slanzini.zookeeper.demo.util.ZkDemoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 @RestController
 public class ZookeeperDemoController {
 

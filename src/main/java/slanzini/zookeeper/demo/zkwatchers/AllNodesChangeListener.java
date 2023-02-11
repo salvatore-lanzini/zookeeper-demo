@@ -1,6 +1,6 @@
-package bkatwal.zookeeper.demo.zkwatchers;
+package slanzini.zookeeper.demo.zkwatchers;
 
-import bkatwal.zookeeper.demo.util.ClusterInfo;
+import slanzini.zookeeper.demo.util.ClusterInfo;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

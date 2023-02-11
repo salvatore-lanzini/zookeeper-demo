@@ -1,11 +1,7 @@
-package bkatwal.zookeeper.demo.util;
+package slanzini.zookeeper.demo.util;
 
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ALL_NODES;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.LIVE_NODES;
-
-import bkatwal.zookeeper.demo.service.ZkService;
-import bkatwal.zookeeper.demo.model.Person;
+import slanzini.zookeeper.demo.service.ZkService;
+import slanzini.zookeeper.demo.model.Person;
 import java.util.List;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
@@ -15,7 +11,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 @Component
 public class OnStartUpApplication implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -59,9 +55,9 @@ public class OnStartUpApplication implements ApplicationListener<ContextRefreshe
 
       // register watchers for leader change, live nodes change, all nodes change and zk session
       // state change
-      zkService.registerChildrenChangeWatcher(ELECTION_NODE, masterChangeListener);
-      zkService.registerChildrenChangeWatcher(LIVE_NODES, liveNodeChangeListener);
-      zkService.registerChildrenChangeWatcher(ALL_NODES, allNodesChangeListener);
+      zkService.registerChildrenChangeWatcher(ZkDemoUtil.ELECTION_NODE, masterChangeListener);
+      zkService.registerChildrenChangeWatcher(ZkDemoUtil.LIVE_NODES, liveNodeChangeListener);
+      zkService.registerChildrenChangeWatcher(ZkDemoUtil.ALL_NODES, allNodesChangeListener);
       zkService.registerZkSessionStateListener(connectStateChangeListener);
     } catch (Exception e) {
       throw new RuntimeException("Startup failed!!", e);

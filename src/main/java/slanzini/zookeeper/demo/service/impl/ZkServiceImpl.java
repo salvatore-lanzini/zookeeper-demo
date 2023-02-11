@@ -1,8 +1,8 @@
-package bkatwal.zookeeper.demo.service.impl;
+package slanzini.zookeeper.demo.service.impl;
 
-import bkatwal.zookeeper.demo.service.ZkService;
-import bkatwal.zookeeper.demo.util.StringSerializer;
-import bkatwal.zookeeper.demo.util.ZkDemoUtil;
+import slanzini.zookeeper.demo.service.ZkService;
+import slanzini.zookeeper.demo.util.StringSerializer;
+import slanzini.zookeeper.demo.util.ZkDemoUtil;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
@@ -18,9 +18,9 @@ import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.*;
+import static slanzini.zookeeper.demo.util.ZkDemoUtil.*;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 @Service
 public class ZkServiceImpl implements ZkService {
 

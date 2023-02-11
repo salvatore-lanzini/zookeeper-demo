@@ -1,4 +1,4 @@
-package bkatwal.zookeeper.demo.configuration;
+package slanzini.zookeeper.demo.configuration;
 
 /** @author "Bikas Katwal" 30/03/19 */
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -39,7 +39,7 @@ public class SwaggerConfig {
         "Spring Boot REST API for Zookeeper demo!",
         "v1",
         "Terms of service",
-        new Contact("Bikas Katwal", "", "bikas.katwal10@gmail.com"),
+        new Contact("Salvatore Lanzini", "", "bikas.katwal10@gmail.com"),
         "",
         "");
   }

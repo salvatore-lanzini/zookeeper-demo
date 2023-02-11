@@ -1,10 +1,10 @@
-package bkatwal.zookeeper.demo.service;
+package slanzini.zookeeper.demo.service;
 
 import java.util.List;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 public interface ZkService {
 
   void addToLiveNodes(String nodeName, String data);

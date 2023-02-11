@@ -1,10 +1,11 @@
-package bkatwal.zookeeper.demo.util;
+package slanzini.zookeeper.demo.util;
 
-import bkatwal.zookeeper.demo.model.Person;
+import slanzini.zookeeper.demo.model.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 public final class DataStorage {
 
   private static List<Person> personList = new ArrayList<>();

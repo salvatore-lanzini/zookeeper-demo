@@ -1,15 +1,14 @@
-package bkatwal.zookeeper.demo.zkwatchers;
+package slanzini.zookeeper.demo.zkwatchers;
 
-import bkatwal.zookeeper.demo.service.ZkService;
-import bkatwal.zookeeper.demo.util.ClusterInfo;
+import slanzini.zookeeper.demo.service.ZkService;
+import slanzini.zookeeper.demo.util.ClusterInfo;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import slanzini.zookeeper.demo.util.ZkDemoUtil;
 
 import java.util.Collections;
 import java.util.List;
-
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE;
 
 /** @author "Bikas Katwal" 27/03/19 */
 public class MasterChangeListenerApproach implements IZkChildListener {
@@ -39,7 +38,7 @@ public class MasterChangeListenerApproach implements IZkChildListener {
       String masterZNode = currentChildren.get(0);
 
       // once znode is fetched, fetch the znode data to get the hostname of new leader
-      String masterNode = zkService.getZNodeData(ELECTION_NODE.concat("/").concat(masterZNode));
+      String masterNode = zkService.getZNodeData(ZkDemoUtil.ELECTION_NODE.concat("/").concat(masterZNode));
       LOGGER.info("new master is: {}", masterNode);
 
       //update the cluster info with new leader

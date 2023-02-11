@@ -1,6 +1,6 @@
-package bkatwal.zookeeper.demo.model;
+package slanzini.zookeeper.demo.model;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 public class Person {
 
   private int id;

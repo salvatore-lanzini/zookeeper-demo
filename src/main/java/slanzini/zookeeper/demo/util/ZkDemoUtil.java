@@ -1,4 +1,4 @@
-package bkatwal.zookeeper.demo.util;
+package slanzini.zookeeper.demo.util;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;

@@ -1,10 +1,9 @@
-package bkatwal.zookeeper.demo;
+package slanzini.zookeeper.demo;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 @SpringBootApplication
 public class Application {
   public static void main(String[] args) {

@@ -1,10 +1,10 @@
-package bkatwal.zookeeper.demo.zkwatchers;
+package slanzini.zookeeper.demo.zkwatchers;
 
-import bkatwal.zookeeper.demo.model.Person;
-import bkatwal.zookeeper.demo.service.ZkService;
-import bkatwal.zookeeper.demo.util.ClusterInfo;
-import bkatwal.zookeeper.demo.util.DataStorage;
-import bkatwal.zookeeper.demo.util.ZkDemoUtil;
+import slanzini.zookeeper.demo.model.Person;
+import slanzini.zookeeper.demo.service.ZkService;
+import slanzini.zookeeper.demo.util.ClusterInfo;
+import slanzini.zookeeper.demo.util.DataStorage;
+import slanzini.zookeeper.demo.util.ZkDemoUtil;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.slf4j.Logger;

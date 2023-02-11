@@ -1,9 +1,9 @@
-package bkatwal.zookeeper.demo.util;
+package slanzini.zookeeper.demo.util;
 
 import java.nio.charset.StandardCharsets;
 import org.I0Itec.zkclient.serialize.ZkSerializer;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 public class StringSerializer implements ZkSerializer {
 
   @Override

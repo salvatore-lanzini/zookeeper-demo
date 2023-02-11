@@ -1,16 +1,19 @@
-package bkatwal.zookeeper.demo.configuration;
+package slanzini.zookeeper.demo.configuration;
 
-import bkatwal.zookeeper.demo.service.ZkService;
-import bkatwal.zookeeper.demo.util.ZkDemoUtil;
-import bkatwal.zookeeper.demo.zkwatchers.*;
+import slanzini.zookeeper.demo.service.ZkService;
+import slanzini.zookeeper.demo.util.ZkDemoUtil;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import slanzini.zookeeper.demo.zkwatchers.AllNodesChangeListener;
+import slanzini.zookeeper.demo.zkwatchers.ConnectStateChangeListener;
+import slanzini.zookeeper.demo.zkwatchers.LiveNodeChangeListener;
+import slanzini.zookeeper.demo.zkwatchers.MasterChangeListenerApproach;
 
-/** @author "Bikas Katwal" 26/03/19 */
+/** @author "Salvatore Lanzinil" 11/02/23 */
 @Configuration
 public class BeanConfig {
 
