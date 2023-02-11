@@ -65,7 +65,7 @@ public class ConnectStateChangeListener implements IZkStateListener {
       return;
     }
     String requestUrl;
-    requestUrl = "http://".concat(ClusterInfo.getClusterInfo().getMaster().concat("/persons"));
+    requestUrl = "http://".concat(ClusterInfo.getClusterInfo().getMaster().concat("/zk-demo/persons"));
     List<Person> persons = restTemplate.getForObject(requestUrl, List.class);
     DataStorage.getPersonListFromStorage().clear();
     DataStorage.getPersonListFromStorage().addAll(persons);

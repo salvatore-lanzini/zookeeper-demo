@@ -29,6 +29,12 @@ public class ZkServiceImpl implements ZkService {
   @Value("${zk.url}")
   private String zkHostPort;
 
+  @Value("${zk.session-timeout}")
+  private Integer zkSessionTimeout;
+
+  @Value("${zk.connection-timeout}")
+  private Integer zkConnectionTimeout;
+
   @Autowired
   private ZkDemoUtil zkDemoUtil;
 
@@ -36,7 +42,7 @@ public class ZkServiceImpl implements ZkService {
 
   @PostConstruct
   public void onStartup(){
-    zkClient = new ZkClient(zkHostPort, 12000, 3000, new StringSerializer());
+    zkClient = new ZkClient(zkHostPort, zkSessionTimeout, zkConnectionTimeout, new StringSerializer());
   }
 
   public void closeConnection() {

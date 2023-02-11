@@ -26,9 +26,9 @@ public class ZookeeperDemoController {
 
   @PutMapping("/person/{id}/{name}")
   public ResponseEntity<String> savePerson(
-      HttpServletRequest request,
-      @PathVariable("id") Integer id,
-      @PathVariable("name") String name) {
+          HttpServletRequest request,
+          @PathVariable("id") Integer id,
+          @PathVariable("name") String name) {
 
     String requestFrom = request.getHeader("request_from");
     String leader = ClusterInfo.getClusterInfo().getMaster();
@@ -50,13 +50,15 @@ public class ZookeeperDemoController {
           successCount++;
         } else {
           String requestUrl =
-              "http://"
-                  .concat(node)
-                  .concat("person")
-                  .concat("/")
-                  .concat(String.valueOf(id))
-                  .concat("/")
-                  .concat(name);
+                  "http://"
+                          .concat(node)
+                          .concat("zk-demo")
+                          .concat("/")
+                          .concat("person")
+                          .concat("/")
+                          .concat(String.valueOf(id))
+                          .concat("/")
+                          .concat(name);
           HttpHeaders headers = new HttpHeaders();
           headers.add("request_from", leader);
           headers.setContentType(MediaType.APPLICATION_JSON);
@@ -68,16 +70,18 @@ public class ZookeeperDemoController {
       }
 
       return ResponseEntity.ok()
-          .body("Successfully update ".concat(String.valueOf(successCount)).concat(" nodes"));
+              .body("Successfully update ".concat(String.valueOf(successCount)).concat(" nodes"));
     } else {
       String requestUrl =
-          "http://"
-              .concat(leader)
-              .concat("person")
-              .concat("/")
-              .concat(String.valueOf(id))
-              .concat("/")
-              .concat(name);
+              "http://"
+                      .concat(leader)
+                      .concat("zk-demo")
+                      .concat("/")
+                      .concat("person")
+                      .concat("/")
+                      .concat(String.valueOf(id))
+                      .concat("/")
+                      .concat(name);
       HttpHeaders headers = new HttpHeaders();
 
       headers.setContentType(MediaType.APPLICATION_JSON);

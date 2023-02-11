@@ -74,7 +74,7 @@ public class OnStartUpApplication implements ApplicationListener<ContextRefreshe
       return;
     }
     String requestUrl;
-    requestUrl = "http://".concat(ClusterInfo.getClusterInfo().getMaster().concat("/persons"));
+    requestUrl = "http://".concat(ClusterInfo.getClusterInfo().getMaster().concat("/zk-demo/persons"));
     List<Person> persons = restTemplate.getForObject(requestUrl, List.class);
     DataStorage.getPersonListFromStorage().addAll(persons);
   }
