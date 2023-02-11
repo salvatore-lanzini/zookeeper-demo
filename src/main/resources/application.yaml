@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: local
+server:
+  servlet.context-path: /zk-demo
+  port: 8280
+zk:
+  url: "localhost:2181"

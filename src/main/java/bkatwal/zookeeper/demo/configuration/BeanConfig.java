@@ -1,15 +1,11 @@
 package bkatwal.zookeeper.demo.configuration;
 
-import bkatwal.zookeeper.demo.api.ZkService;
-import bkatwal.zookeeper.demo.impl.ZkServiceImpl;
-import bkatwal.zookeeper.demo.zkwatchers.AllNodesChangeListener;
-import bkatwal.zookeeper.demo.zkwatchers.ConnectStateChangeListener;
-import bkatwal.zookeeper.demo.zkwatchers.LiveNodeChangeListener;
-import bkatwal.zookeeper.demo.zkwatchers.MasterChangeListener;
-import bkatwal.zookeeper.demo.zkwatchers.MasterChangeListenerApproach2;
+import bkatwal.zookeeper.demo.service.ZkService;
+import bkatwal.zookeeper.demo.util.ZkDemoUtil;
+import bkatwal.zookeeper.demo.zkwatchers.*;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -18,12 +14,10 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class BeanConfig {
 
-  @Bean(name = "zkService")
-  @Scope("singleton")
-  public ZkService zkService() {
-    String zkHostPort = System.getProperty("zk.url");
-    return new ZkServiceImpl(zkHostPort);
-  }
+  @Autowired
+  private ZkDemoUtil zkDemoUtil;
+  @Autowired
+  private ZkService zkService;
 
   @Bean(name = "allNodesChangeListener")
   @Scope("singleton")
@@ -38,28 +32,18 @@ public class BeanConfig {
   }
 
   @Bean(name = "masterChangeListener")
-  @ConditionalOnProperty(name = "leader.algo", havingValue = "1")
-  @Scope("singleton")
-  public IZkChildListener masterChangeListener() {
-    MasterChangeListener masterChangeListener = new MasterChangeListener();
-    masterChangeListener.setZkService(zkService());
-    return masterChangeListener;
-  }
-
-  @Bean(name = "masterChangeListener")
-  @ConditionalOnProperty(name = "leader.algo", havingValue = "2", matchIfMissing = true)
   @Scope("singleton")
   public IZkChildListener masterChangeListener2() {
     MasterChangeListenerApproach2 masterChangeListener = new MasterChangeListenerApproach2();
-    masterChangeListener.setZkService(zkService());
+    masterChangeListener.setZkService(zkService);
     return masterChangeListener;
   }
 
   @Bean(name = "connectStateChangeListener")
   @Scope("singleton")
   public IZkStateListener connectStateChangeListener() {
-    ConnectStateChangeListener connectStateChangeListener = new ConnectStateChangeListener();
-    connectStateChangeListener.setZkService(zkService());
+    ConnectStateChangeListener connectStateChangeListener = new ConnectStateChangeListener(zkDemoUtil);
+    connectStateChangeListener.setZkService(zkService);
     return connectStateChangeListener;
   }
 }

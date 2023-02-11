@@ -1,10 +1,19 @@
 package bkatwal.zookeeper.demo.util;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /** @author "Bikas Katwal" 27/03/19 */
+@Component
+@Scope("singleton")
 public final class ZkDemoUtil {
+
+  @Value("${server.port}")
+  private Integer serverPort;
 
   public static final String ELECTION_MASTER = "/election/master";
   public static final String ELECTION_NODE = "/election";
@@ -14,7 +23,7 @@ public final class ZkDemoUtil {
 
   private static String ipPort = null;
 
-  public static String getHostPostOfServer() {
+  public String getHostPostOfServer() {
     if (ipPort != null) {
       return ipPort;
     }
@@ -24,8 +33,7 @@ public final class ZkDemoUtil {
     } catch (UnknownHostException e) {
       throw new RuntimeException("failed to fetch Ip!", e);
     }
-    int port = Integer.parseInt(System.getProperty("server.port"));
-    ipPort = ip.concat(":").concat(String.valueOf(port));
+    ipPort = ip.concat(":").concat(String.valueOf(serverPort));
     return ipPort;
   }
 

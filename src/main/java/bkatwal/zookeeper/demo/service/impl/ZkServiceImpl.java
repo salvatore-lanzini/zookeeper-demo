@@ -1,33 +1,43 @@
-package bkatwal.zookeeper.demo.impl;
+package bkatwal.zookeeper.demo.service.impl;
 
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ALL_NODES;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_MASTER;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE_2;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.LIVE_NODES;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.getHostPostOfServer;
-
-import bkatwal.zookeeper.demo.api.ZkService;
+import bkatwal.zookeeper.demo.service.ZkService;
 import bkatwal.zookeeper.demo.util.StringSerializer;
-import java.util.Collections;
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
+import bkatwal.zookeeper.demo.util.ZkDemoUtil;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
 import org.I0Itec.zkclient.exception.ZkNodeExistsException;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Collections;
+import java.util.List;
+
+import static bkatwal.zookeeper.demo.util.ZkDemoUtil.*;
 
 /** @author "Bikas Katwal" 26/03/19 */
-@Slf4j
+@Service
 public class ZkServiceImpl implements ZkService {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(ZkServiceImpl.class);
+
+  @Value("${zk.url}")
+  private String zkHostPort;
+
+  @Autowired
+  private ZkDemoUtil zkDemoUtil;
 
   private ZkClient zkClient;
 
-  
-  public ZkServiceImpl(String hostPort) {
-    zkClient = new ZkClient(hostPort, 12000, 3000, new StringSerializer());
+  @PostConstruct
+  public void onStartup(){
+    zkClient = new ZkClient(zkHostPort, 12000, 3000, new StringSerializer());
   }
 
   public void closeConnection() {
@@ -48,11 +58,11 @@ public class ZkServiceImpl implements ZkService {
     try {
       zkClient.create(
           ELECTION_MASTER,
-          getHostPostOfServer(),
+          zkDemoUtil.getHostPostOfServer(),
           ZooDefs.Ids.OPEN_ACL_UNSAFE,
           CreateMode.EPHEMERAL);
     } catch (ZkNodeExistsException e) {
-      log.error("Master already created!!, {}", e);
+      LOGGER.error("Master already created!!, {}", e);
     }
   }
 

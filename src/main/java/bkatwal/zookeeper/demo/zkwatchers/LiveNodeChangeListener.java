@@ -1,13 +1,15 @@
 package bkatwal.zookeeper.demo.zkwatchers;
 
 import bkatwal.zookeeper.demo.util.ClusterInfo;
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import org.I0Itec.zkclient.IZkChildListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.List;
 
 /** @author "Bikas Katwal" 26/03/19 */
-@Slf4j
 public class LiveNodeChangeListener implements IZkChildListener {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(LiveNodeChangeListener.class);
 
   /**
    * - This method will be invoked for any change in /live_nodes children
@@ -19,7 +21,7 @@ public class LiveNodeChangeListener implements IZkChildListener {
    */
   @Override
   public void handleChildChange(String parentPath, List<String> currentChildren) {
-    log.info("current live size: {}", currentChildren.size());
+    LOGGER.info("current live size: {}", currentChildren.size());
     ClusterInfo.getClusterInfo().getLiveNodes().clear();
     ClusterInfo.getClusterInfo().getLiveNodes().addAll(currentChildren);
   }

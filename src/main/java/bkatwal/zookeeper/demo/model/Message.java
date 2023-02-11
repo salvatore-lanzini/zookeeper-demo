@@ -1,14 +1,26 @@
 package bkatwal.zookeeper.demo.model;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /** @author "Bikas Katwal" 26/03/19 */
-@Getter
-@AllArgsConstructor
 public class Message {
 
   private String message;
   List<Person> persons;
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public List<Person> getPersons() {
+    return persons;
+  }
+
+  public void setPersons(List<Person> persons) {
+    this.persons = persons;
+  }
 }

@@ -1,27 +1,26 @@
 package bkatwal.zookeeper.demo.controller;
 
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.getHostPostOfServer;
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.isEmpty;
-
 import bkatwal.zookeeper.demo.model.Person;
 import bkatwal.zookeeper.demo.util.ClusterInfo;
 import bkatwal.zookeeper.demo.util.DataStorage;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import bkatwal.zookeeper.demo.util.ZkDemoUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 /** @author "Bikas Katwal" 26/03/19 */
 @RestController
 public class ZookeeperDemoController {
+
+  @Autowired
+  private ZkDemoUtil zkDemoUtil;
 
   private RestTemplate restTemplate = new RestTemplate();
 
@@ -33,7 +32,7 @@ public class ZookeeperDemoController {
 
     String requestFrom = request.getHeader("request_from");
     String leader = ClusterInfo.getClusterInfo().getMaster();
-    if (!isEmpty(requestFrom) && requestFrom.equalsIgnoreCase(leader)) {
+    if (!zkDemoUtil.isEmpty(requestFrom) && requestFrom.equalsIgnoreCase(leader)) {
       Person person = new Person(id, name);
       DataStorage.setPerson(person);
       return ResponseEntity.ok("SUCCESS");
@@ -45,7 +44,7 @@ public class ZookeeperDemoController {
       int successCount = 0;
       for (String node : liveNodes) {
 
-        if (getHostPostOfServer().equals(node)) {
+        if (zkDemoUtil.getHostPostOfServer().equals(node)) {
           Person person = new Person(id, name);
           DataStorage.setPerson(person);
           successCount++;
@@ -90,7 +89,7 @@ public class ZookeeperDemoController {
 
   private boolean amILeader() {
     String leader = ClusterInfo.getClusterInfo().getMaster();
-    return getHostPostOfServer().equals(leader);
+    return zkDemoUtil.getHostPostOfServer().equals(leader);
   }
 
   @GetMapping("/persons")

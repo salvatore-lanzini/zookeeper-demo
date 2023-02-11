@@ -1,4 +1,4 @@
-package bkatwal.zookeeper.demo.api;
+package bkatwal.zookeeper.demo.service;
 
 import java.util.List;
 import org.I0Itec.zkclient.IZkChildListener;

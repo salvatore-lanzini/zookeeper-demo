@@ -1,21 +1,26 @@
 package bkatwal.zookeeper.demo.zkwatchers;
 
-import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE_2;
-
-import bkatwal.zookeeper.demo.api.ZkService;
+import bkatwal.zookeeper.demo.service.ZkService;
 import bkatwal.zookeeper.demo.util.ClusterInfo;
+import org.I0Itec.zkclient.IZkChildListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collections;
 import java.util.List;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-import org.I0Itec.zkclient.IZkChildListener;
+
+import static bkatwal.zookeeper.demo.util.ZkDemoUtil.ELECTION_NODE_2;
 
 /** @author "Bikas Katwal" 27/03/19 */
-@Slf4j
-@Setter
 public class MasterChangeListenerApproach2 implements IZkChildListener {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(MasterChangeListenerApproach2.class);
+
   private ZkService zkService;
+
+  public void setZkService(ZkService zkService) {
+    this.zkService = zkService;
+  }
 
   /**
    * listens for deletion of sequential znode under /election znode and updates the
@@ -35,7 +40,7 @@ public class MasterChangeListenerApproach2 implements IZkChildListener {
 
       // once znode is fetched, fetch the znode data to get the hostname of new leader
       String masterNode = zkService.getZNodeData(ELECTION_NODE_2.concat("/").concat(masterZNode));
-      log.info("new master is: {}", masterNode);
+      LOGGER.info("new master is: {}", masterNode);
 
       //update the cluster info with new leader
       ClusterInfo.getClusterInfo().setMaster(masterNode);
