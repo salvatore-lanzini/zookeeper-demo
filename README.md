@@ -1,5 +1,5 @@
 
-![alt text](https://github.com/salvatore-lanzini/zookeeper-demo/ZookeeperDemo.png)
+![alt text](https://github.com/salvatore-lanzini/zookeeper-demo/blob/master/ZookeeperDemo.png)
 
 ## Key features supported:
 

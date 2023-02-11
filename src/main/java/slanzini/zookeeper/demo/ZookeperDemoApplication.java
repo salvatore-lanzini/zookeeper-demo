@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /** @author "Salvatore Lanzinil" 11/02/23 */
 @SpringBootApplication
-public class Application {
+public class ZookeperDemoApplication {
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(ZookeperDemoApplication.class, args);
   }
 }
