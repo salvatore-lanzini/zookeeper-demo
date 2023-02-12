@@ -35,6 +35,11 @@ public final class ZkDemoUtil {
     return ipPort;
   }
 
+  public boolean amILeader() {
+    String leader = ClusterInfo.getClusterInfo().getMaster();
+    return getHostPostOfServer().equals(leader);
+  }
+
   public static boolean isEmpty(String str) {
     return str == null || str.length() == 0;
   }

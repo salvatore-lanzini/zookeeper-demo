@@ -38,7 +38,7 @@ public class ZookeeperDemoController {
       return ResponseEntity.ok("SUCCESS");
     }
     // If I am leader I will broadcast data to all live node, else forward request to leader
-    if (amILeader()) {
+    if (zkDemoUtil.amILeader()) {
       List<String> liveNodes = ClusterInfo.getClusterInfo().getLiveNodes();
 
       int successCount = 0;
@@ -89,11 +89,6 @@ public class ZookeeperDemoController {
       HttpEntity<String> entity = new HttpEntity<>(headers);
       return restTemplate.exchange(requestUrl, HttpMethod.PUT, entity, String.class);
     }
-  }
-
-  private boolean amILeader() {
-    String leader = ClusterInfo.getClusterInfo().getMaster();
-    return zkDemoUtil.getHostPostOfServer().equals(leader);
   }
 
   @GetMapping("/persons")

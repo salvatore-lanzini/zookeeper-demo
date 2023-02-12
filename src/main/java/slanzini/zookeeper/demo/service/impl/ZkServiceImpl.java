@@ -1,8 +1,5 @@
 package slanzini.zookeeper.demo.service.impl;
 
-import slanzini.zookeeper.demo.service.ZkService;
-import slanzini.zookeeper.demo.util.StringSerializer;
-import slanzini.zookeeper.demo.util.ZkDemoUtil;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
@@ -10,9 +7,10 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import slanzini.zookeeper.demo.service.ZkService;
+import slanzini.zookeeper.demo.util.StringSerializer;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
@@ -34,9 +32,6 @@ public class ZkServiceImpl implements ZkService {
 
   @Value("${zk.connection-timeout}")
   private Integer zkConnectionTimeout;
-
-  @Autowired
-  private ZkDemoUtil zkDemoUtil;
 
   private ZkClient zkClient;
 

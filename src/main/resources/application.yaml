@@ -4,6 +4,8 @@ spring:
 server:
   servlet.context-path: /zk-demo
   port: 8280
+scheduled-task:
+  users-elaboration: "0 */1 * * * *"
 zk:
   url: "localhost:2181"
   session-timeout: 3000
